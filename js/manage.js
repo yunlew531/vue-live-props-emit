@@ -44,7 +44,7 @@ const app = Vue.createApp({
         } else {
           this.handMessage(data.message);
           setTimeout(() => {
-            window.location.href = './vue-live-props-emit/index.html';
+            window.location.href = './index.html';
           }, 3000);
         }
       }
@@ -59,7 +59,7 @@ const app = Vue.createApp({
           this.handMessage(data.message);
           document.cookie = `Hegoze=;expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
           setTimeout(() => {
-            window.location.href = './vue-live-props-emit/index.html';
+            window.location.href = './index.html';
           }, 3000);
         } else {
           this.handMessage(data.message);
