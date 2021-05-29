@@ -75,7 +75,7 @@ export default {
       if(style === 'outline') {
         this.products.forEach((product, idx) => {
           if (product.id === id) {
-            this.products[idx].stars = this.products[idx].stars ? this.products[idx].stars + key + 1 : 0 + key + 1;
+            this.products[idx].stars = this.products[idx].stars ? this.products[idx].stars + key + 1 : key + 1;
           }
         });
       } else if (style === 'solid') {
