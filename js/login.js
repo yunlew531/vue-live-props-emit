@@ -26,7 +26,7 @@ const app = Vue.createApp({
         if (data.success) {
           this.handMessage('已登入!跳轉中');
           setTimeout(() => {
-            window.location.href = './vue-live-props-emit/manage.html';
+            window.location.href = './manage.html';
           }, 3000);
         }
       }
@@ -48,7 +48,7 @@ const app = Vue.createApp({
           const token = data.token;
           const expired = new Date(data.expired);
           document.cookie = `Hegoze=${token}; expires=${expired}`;
-          window.location.href = './vue-live-props-emit/manage.html';
+          window.location.href = './manage.html';
         } else {
           this.handMessage(data.message);
         }
