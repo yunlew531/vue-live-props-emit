@@ -23,14 +23,10 @@ const app = Vue.createApp({
   data() {
     return {
       productsData: [],
-      productModal: null,
-      delProductModal: null,
-      messageModal: null,
       messageText: '',
-      tempId: '',
       tempProduct: {},
       validateStatus: false,
-      tempDelProduct: '',
+      tempDelProduct: {},
       modalAction: '',
       pagination: {},
     };
@@ -90,27 +86,18 @@ const app = Vue.createApp({
       });
     },
     openProductModal({ action, product }) {
+      this.resetModal();
       this.handValidateStatus(false);
       this.modalAction = action === 'new' ? '新增產品' : '編輯產品';
       this.tempProduct = action === 'edit' ? { ...product } : {};
-      this.tempId = product?.id;
-      this.productModal.show();
-    },
-    closeProductModal() {
-      this.productModal.hide();
-      this.resetModal();
+      this.$refs.productModal.productModal.show();
     },
     openDelModal({title, id}) {
-      this.tempId = id;
-      this.tempDelProduct = title;
-      this.delProductModal.show();
-    },
-    closeDelModal() {
-      this.delProductModal.hide();
+      this.$refs.deleteModal.delProductModal.show();
+      this.tempDelProduct = { title, id };
     },
     resetModal() {
       this.tempProduct = {};
-      this.tempId = '';
       this.handValidateStatus(false);
     },
     handPage(page) {
@@ -123,10 +110,10 @@ const app = Vue.createApp({
       this.validateStatus = status;
     },
     handMessage(msg) {
-      this.messageModal.show();
+      this.$refs.messageModal.messageModal.show();
       this.messageText = msg;
       setTimeout(() => {
-        this.messageModal.hide();
+        this.$refs.messageModal.messageModal.hide();
       }, 3000);
     },
   },
@@ -134,11 +121,6 @@ const app = Vue.createApp({
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)Hegoze\s*=\s*([^;]*).*$)|^.*$/, '$1');
     req.defaults.headers.common['Authorization'] = token;
     this.checkLogin();
-  },
-  mounted() {
-    this.productModal = new bootstrap.Modal(document.querySelector('#productModal'), { keyboard: false });
-    this.delProductModal = new bootstrap.Modal(document.querySelector('#delProductModal'), { keyboard: false });
-    this.messageModal = new bootstrap.Modal(document.querySelector('#messageModal'), { keyboard: false });
   },
 })
 .mount('#app');

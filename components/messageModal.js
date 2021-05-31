@@ -3,7 +3,7 @@ export default {
     messageText: String,
   },
   template: `
-    <div id="messageModal" class="modal fade" tabindex="-1">
+    <div id="messageModal" ref="messageModal" class="modal fade" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body text-center py-5">
@@ -16,4 +16,12 @@ export default {
       </div>
     </div>
   `,
+  data() {
+    return {
+      messageModal: null,
+    }
+  },
+  mounted() {
+    this.messageModal = new bootstrap.Modal(this.$refs.messageModal, { keyboard: false });
+  },
 }

@@ -4,7 +4,8 @@ export default {
   },
   emits: {
     handOpenProductModal: ({ action }) => typeof action === 'string',
-    handOpenDelModal: product => typeof product === 'object',
+    handOpenDelModal: ({ id, title }) => typeof id === 'string' && 
+      typeof title === 'string' ? true : false,
   },
   template: `
     <table class="table mt-4">

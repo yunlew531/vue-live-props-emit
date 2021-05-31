@@ -4,7 +4,6 @@ export default {
   props: {
     tempProduct: Object,
     modalAction: String,
-    tempId: String,
     validateStatus: Boolean, 
   },
   emits: {
@@ -113,6 +112,11 @@ export default {
       </div>
     </div>
   `,
+  data() {
+    return {
+      productModal: null,
+    }
+  },
   methods: {
     async uploadImg() {
       const file = this.$refs.imgUpload.files[0];
@@ -134,7 +138,7 @@ export default {
     async reqProduct() {
       const api = this.modalAction === '新增產品' ? 
       `/api/${apiPath}/admin/product` :
-      `/api/${apiPath}/admin/product/${this.tempId}`;
+      `/api/${apiPath}/admin/product/${this.tempProduct.id}`;
       const method = this.modalAction === '新增產品' ? 'post' : 'put';
       this.$emit('handValidateStatus', true);
       const { title, category, unit, origin_price, price } = this.tempProduct;
@@ -143,7 +147,7 @@ export default {
         const { data } = await req[method](api, { data: this.tempProduct });
         if (data.success) {
           this.$emit('handValidateStatus', false);
-          this.$emit('handCloseProductModal');
+          this.productModal.hide();
           this.$emit('handMessage', data.message);
         } else {
           this.$emit('handMessage', data.message);
@@ -154,5 +158,8 @@ export default {
       }
       this.$emit('handGetProducts');
     },
+  },
+  mounted() {
+    this.productModal = new bootstrap.Modal(this.$refs.productModal, { keyboard: false });
   },
 }

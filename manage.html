@@ -32,11 +32,10 @@
     </div>
     <!-- temp product component -->
     <temp-product-modal
+      ref="productModal"
       :temp-product="tempProduct"
       :modal-action="modalAction"
-      :temp-id="tempId"
       :validate-status="validateStatus"
-      @hand-close-product-modal="closeProductModal"
       @hand-reset-modal="resetModal"
       @hand-get-products="getProducts"
       @hand-message="handMessage"
@@ -44,13 +43,13 @@
     </temp-product-modal>
     <!-- message modal component -->
     <message-modal
+      ref="messageModal"
       :message-text="messageText">
     </message-modal>  
     <!-- delete modal component -->
     <delete-modal
-      :temp-id="tempId"
+      ref="deleteModal"
       :temp-del-product="tempDelProduct"
-      @hand-close-del-modal="closeDelModal"
       @hand-get-products="getProducts"
       @hand-message="handMessage">
     </delete-modal>
