@@ -2,7 +2,7 @@ import { req, apiPath } from '../js/manage.js';
 
 export default {
   props: {
-    tempProduct: Object,
+    product: Object,
     modalAction: String,
     validateStatus: Boolean, 
   },
@@ -114,8 +114,17 @@ export default {
   `,
   data() {
     return {
+      tempProduct: { ...this.product },
       productModal: null,
     }
+  },
+  watch: {
+    product: {
+      handler() {
+        this.tempProduct = { ...this.product };
+      },
+      deep: true,
+    },
   },
   methods: {
     async uploadImg() {
